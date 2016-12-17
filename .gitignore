@@ -1,0 +1,19 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# node-waf configuration
+.lock-wscript
+
+# Dependency directories
+node_modules
+
+# Local Data
+server/app/book/*
+server/app/walkingblog/*
+server/app/blog/*
+server/app/static/bundle.js
