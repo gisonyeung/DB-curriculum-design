@@ -4,7 +4,7 @@ var path = require('path');
 
 module.exports = {
 	entry: [
-    	'webpack-hot-middleware/client?reload=true&http://localhost:8000',
+    	'webpack-hot-middleware/client?reload=true&http://localhost:7000',
 		'webpack/hot/only-dev-server',
 		'./src/app.js',
 	],
@@ -14,19 +14,22 @@ module.exports = {
 		publicPath: "/static/"
 	},
 	resolve: {
-		extensions: ['', '.vue', '.js']
+		extensions: ['', '.vue', '.js'],
+		alias: {
+			'vue$': 'vue/dist/vue.js' // 为使用vue的`template` 参考 https://cn.vuejs.org/v2/guide/installation.html#独立构建-vs-运行时构建
+		}
 	},
 	module: {
 		loaders: [
 			{
 				test: /\.vue$/,
-				loaders: 'vue-loader',
+				loader: 'vue-loader',
 				exclude: /node_modules/,
 				include: __dirname
 			},
 			{
 				test: /\.js$/,
-				loaders: ['babel'],
+				loaders: ['babel-loader'],
 				exclude: /node_modules/,
 				include: __dirname
 			},
@@ -58,7 +61,7 @@ module.exports = {
 		hot: true,
 		inline: true,
 		progress: true,
-		port: 8000,
+		port: 7000,
 	},
 
 }

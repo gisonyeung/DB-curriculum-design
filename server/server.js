@@ -1,6 +1,7 @@
 
 var express = require('express');
 var app = express();
+var PORT = 7000;
 
 /* dev */
 var webpack = require('webpack');
@@ -10,16 +11,21 @@ var config = require('../webpack.config');
 var compiler = webpack(config);
 /* dev end*/
 
-var bodyParser = require('body-parser');
-var PORT = 7000;
-
 // 静态文件路径
 app.use(express.static(__dirname + '/app'));
 
-// dev
+/* dev */
+app.use(webpackDevMiddleware(compiler, { 
+	noInfo: true, 
+	publicPath: config.output.publicPath,
+	hot: true,
+	stats: { colors: true } ,
+}));
 app.use(webpackHotMiddleware(compiler));
+/* dev end*/
 
 // 修改请求体大小限制（默认的会比较小）
+var bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
@@ -33,6 +39,7 @@ var credentials = require('./credentials.js');
 // cookie
 app.use(require('cookie-parser')(credentials.cookieSecret));
 
+
 /* 中间件 */
 app.use(function(req, res, next) {
 	// 如果session有user，把它传到上下文中
@@ -41,12 +48,13 @@ app.use(function(req, res, next) {
 });
 /* 中间件 end */
 
+
 // 路由
 require('./routes.js')(app);
 
 
 
-/* 启动服务器 */
+// 启动服务器
 app.listen(PORT, function(err) {
 	if ( err ) {
 		console.log('服务器启动失败：', err);
