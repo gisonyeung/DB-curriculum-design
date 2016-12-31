@@ -1,0 +1,85 @@
+@charset "utf-8";
+@import "./common";
+
+.course-info {
+	margin-bottom: 7px;
+	color: #999;
+
+	span {
+		color: #333;
+	}
+}
+
+.m {
+	&-header {
+		margin-top: 25px;
+		padding: 15px 0;
+		color: #999;
+		border-bottom: 1px solid #eee;
+	}
+
+	&-body {
+
+		& > .row {
+			// padding: 15px 0;
+			border-bottom: 1px dashed #eee;
+
+			& > p {
+				line-height: 54px;
+				height: 54px;
+			}
+
+			.icon {
+				cursor: pointer;
+			}
+		}
+
+		.score-input {
+			width: 90px;
+			padding: 6px 5px;
+			border: 1px solid #ccc;
+			font-size: 13px;
+			font-family: inherit;
+			border-radius: 2px;
+			@include transition;
+
+			&:focus {
+				border-color: $themeColor;
+			}
+		}
+
+		.btn {
+			font-family: inherit;
+			font-size: 13px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			padding: 6px 10px;
+			cursor: pointer;
+			@include transition;
+
+			&:hover {
+				background-color: #f6f6f6;
+			}
+
+			&:active {
+				background-color: #eee;
+			}
+
+			&-confirm {
+				color: #fff;
+				background-color: $themeColor;
+				border-color: darken($themeColor, 5%);
+
+				&:hover {
+					background-color: darken($themeColor, 5%);
+				}
+
+				&:active {
+					background-color: darken($themeColor, 7%)
+				}
+			}
+
+		}
+	}
+}

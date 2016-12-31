@@ -1,0 +1,74 @@
+@charset "utf-8";
+@import "./common";
+
+#header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: $headerH;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(57,70,78,.2);
+    z-index: 100;
+
+	.brand {
+		float: left;
+		margin: 0 15px;
+
+		a {
+			@include bgsize(64px, $headerH);
+	    	@include bgimg('../img/icon-fish.png');
+			
+		}
+	}
+
+
+}
+
+
+.action {
+	&-list {
+
+		.icon {
+			margin-right: 2px;
+			vertical-align: -5%;
+		}
+
+	}
+
+	&-item {
+		float: left;
+		display: inline-block;
+		margin-right: 1px;
+		padding: 0 11px;
+		height: $headerH - 3px;
+		line-height: $headerH;
+		font-size: 14px;
+		color: #39464E;
+		border-bottom: 3px solid #fff;
+		@include transition($time: 0.1s);
+		&:hover, &.router-link-active {
+			border-bottom-color: #1C90F3;
+		}
+
+		&.disabled {
+			cursor: default;
+			border: 0;
+		}
+	}
+}
+
+
+.nav {
+
+}
+
+.user-handle {
+	float: right;
+	margin-right: 10px;
+	list-style-type: none;
+
+	li {
+		float: left;
+	}
+}

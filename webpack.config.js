@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 // var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 var path = require('path');
+var pathToBourbon = require('node-bourbon').includePaths;
 
 module.exports = {
 	entry: [
@@ -14,7 +15,7 @@ module.exports = {
 		publicPath: "/static/"
 	},
 	resolve: {
-		extensions: ['', '.vue', '.js'],
+		extensions: ['', '.vue', '.js', '.scss'],
 		alias: {
 			'vue$': 'vue/dist/vue.js' // 为使用vue的`template` 参考 https://cn.vuejs.org/v2/guide/installation.html#独立构建-vs-运行时构建
 		}
@@ -23,19 +24,17 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.vue$/,
-				loader: 'vue-loader',
+				loader: 'vue-loader?includePaths[]=' + pathToBourbon,
 				exclude: /node_modules/,
-				include: __dirname
 			},
 			{
 				test: /\.js$/,
 				loaders: ['babel-loader'],
 				exclude: /node_modules/,
-				include: __dirname
 			},
 			{
 				test: /\.scss$/,
-				loader: "style!css!sass"
+				loaders: ['vue-style!css!sass?includePaths[]=' + pathToBourbon, 'style!css!sass?includePaths[]=' + pathToBourbon],
 			},
 			{
 				test: /\.(jpg|png|jpeg|gif)$/,
@@ -51,6 +50,15 @@ module.exports = {
 			},
 		]
 	},
+	vue: {
+		loaders: {
+			scss: 'vue-style!css!sass?includePaths[]=' + pathToBourbon,
+			exclude: /node_modules/,
+		}
+	},
+	sassLoader: {
+        includePaths: [pathToBourbon]
+    },
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
