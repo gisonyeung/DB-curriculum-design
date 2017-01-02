@@ -63,7 +63,7 @@ a {
 	text-decoration: none;
 }
 
-input, textarea, button, a {
+input, textarea, button, a, select{
 	outline: none;
 }
 
@@ -72,7 +72,7 @@ $headerH: 55px;
 // $themeColor: #4dcbe1;
 $themeColor: #03A9F4;
 // $themeColor: #77cddc;
-
+$warningColor: #f44336;
 
 
 

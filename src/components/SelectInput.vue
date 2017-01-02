@@ -3,21 +3,22 @@
 		<label class="widget-title" :for="elemId">
 			{{labelName}}：
 		</label>
-		<input 
+		<select 
 			:type="type ? type : 'text'" 
 			class="form-control" 
 			:id="elemId" 
-			:placeholder="defaultMsg" 
 			:value="value"
-			@input="updateValue($event.target.value)"
+			@change="updateValue($event.target.value)"
 			>
+			<slot></slot>
+		</select>
 		<p class="widget-tip" v-if="tip">{{tip}}</p>
 	</div>
 </template>
 
 <script>
 	export default {
-		props: ['labelName' ,'elemId', 'value', 'defaultMsg', 'type', 'tip'],
+		props: ['labelName' ,'elemId', 'value', 'type', 'tip'],
 		methods: {
 			updateValue: function(value) {
 				this.$emit('update', value);

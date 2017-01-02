@@ -40,10 +40,18 @@ var credentials = require('./credentials.js');
 app.use(require('cookie-parser')(credentials.cookieSecret));
 
 
+var usercookie = require('./utils/usercookie');
 /* 中间件 */
 app.use(function(req, res, next) {
-	// 如果session有user，把它传到上下文中
-	// res.locals.user = req.session.user;
+	// 如果cookies有user信息，把它传到上下文中
+	if (req.cookies.username !== 'undefined' && req.cookies.username) {
+		res.locals.username = req.cookies.username;
+		res.locals.role = req.cookies.role;
+		// 更新cookie时长
+		usercookie.setCookie(res, req.cookies);
+	} else {
+		usercookie.clearCookie(res);
+	}
 	next();
 });
 /* 中间件 end */

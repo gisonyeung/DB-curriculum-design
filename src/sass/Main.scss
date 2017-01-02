@@ -5,6 +5,12 @@
 	margin-top: $headerH + 40px;
 }
 
+// 防止滚动条显隐导致内容跳动
+#app {
+   padding-left: calc(100vw - 100%);
+}
+
+
 .wrapper {
 	margin: 0 auto;
 	padding: 40px 30px 200px;
@@ -17,6 +23,18 @@
 
 	.page-title {
 
+		a {
+			margin-top: 6px;
+			float: right;
+			font-size: 16px;
+			color: #2196f3;
+
+			@include transition;
+
+			&:hover {
+				color: $themeColor;
+			}
+		}
 	}
 }
 
@@ -32,17 +50,39 @@
 .data-box {
 	margin: 0 auto;
 	width: 450px;
+
+	.global-tip {
+		float: left;
+		margin: 30px 10px 0 0;
+		color: $warningColor;
+	}
 }
 
 .section {
 	padding: 25px 0;
 }
 
-.widget-title {
-	padding: 13px 0;
-	display: block;
-	font-size: 15px;
-	color: #78909C;
+.widget {
+
+	&-row {
+		position: relative;
+	}
+
+	&-title {
+		padding: 13px 0;
+		display: block;
+		font-size: 15px;
+		color: #78909C;
+	}
+
+	&-tip {
+		position: absolute;
+		left: 102%;
+		bottom: 17px;
+		color: $warningColor;
+		font-size: 14px;
+	}
+
 }
 
 .form-control {
@@ -63,6 +103,7 @@
 }
 
 .row {
+	position: relative;
 	display: block;
 	@extend .clearfix;
 }
